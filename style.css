@@ -1,0 +1,407 @@
+* {
+   box-sizing: border-box;
+   font-family: 'Poppins', sans-serif;
+}
+
+body {
+   margin: 0;
+   min-height: 100vh;
+   background: url('./Images/background.jpg') center/cover no-repeat fixed;
+   justify-content: center;
+   padding: 20px;
+   align-items: center;
+   display: flex;
+   color: #f8fafc;
+}
+
+/* Glassmorphism Card Container */
+.card {
+   background: rgba(15, 23, 42, 0.45);
+   backdrop-filter: blur(16px);
+   -webkit-backdrop-filter: blur(16px);
+   padding: 30px 35px;
+   text-align: center;
+   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+   border: 1px solid rgba(255, 255, 255, 0.18);
+   border-radius: 20px;
+}
+
+#lock-screen {
+   max-width: 340px;
+   width: 100%;
+}
+
+.icon {
+   font-size: 2.5rem;
+   filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+}
+
+h2 {
+   font-family: 'Courier New', Courier, monospace;
+   color: black;
+   margin: 10px 0 5px 0;
+   font-size: 1.6rem;
+   font-weight: 700;
+   letter-spacing: 1px;
+   -webkit-text-stroke-width: 0.3px;
+   -webkit-text-stroke-color: #000;
+}
+
+.sub-text {
+   font-size: 0.8rem;
+   color: #e2e8f0;
+   margin: -2px 0 18px 0;
+   letter-spacing: 0.5px;
+   font-weight: 300;
+}
+
+/* PIN Dots */
+.pin-display {
+   display: flex;
+   justify-content: center;
+   gap: 15px;
+   margin-bottom: 15px;
+}
+
+.dot {
+   width: 14px;
+   height: 14px;
+   border-radius: 50%;
+   border: 2px solid #facc15;
+   transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.active {
+   background: #facc15;
+   transform: scale(1.15);
+   box-shadow: 0 0 10px rgba(250, 204, 21, 0.6);
+}
+
+.hint {
+   font-size: 0.8rem;
+   color: #cbd5e1;
+   margin-bottom: 5px;
+   padding-top: 20px;
+   font-weight: 300;
+}
+
+#error-msg {
+   color: #f87171;
+   font-size: 0.85rem;
+   display: none;
+   margin-bottom: 10px;
+   font-weight: 500;
+}
+
+/* Keypad Grid */
+.keypad {
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   gap: 14px;
+   justify-items: center;
+}
+
+.keypad button {
+   width: 60px;
+   height: 60px;
+   border-radius: 50%;
+   border: 1px solid rgba(255, 255, 255, 0.2);
+   background: rgba(255, 255, 255, 0.08);
+   color: #ffffff;
+   font-size: 1.25rem;
+   font-weight: 500;
+   cursor: pointer;
+   transition: all 0.2s ease;
+}
+
+.keypad button:hover {
+   background: rgba(255, 255, 255, 0.2);
+   border-color: rgba(255, 255, 255, 0.4);
+}
+
+.keypad button:active {
+   transform: scale(0.92);
+   background: #facc15;
+   color: #0f172a;
+}
+
+.keypad .action-btn {
+   font-size: 0.95rem;
+   background: rgba(255, 255, 255, 0.03);
+   border-color: transparent;
+}
+
+/* Main Content */
+#main-content {
+   background: url('./Images/background_2.gif') center/cover no-repeat fixed;
+   display: none;
+   width: 100%;
+   max-width: 750px;
+   text-align: center;
+   position: relative;
+   overflow: hidden;
+}
+
+.hero-card {
+   cursor: pointer;
+   transition: transform 0.3s ease, box-shadow 0.3s ease;
+   margin-bottom: 25px;
+}
+
+.hero-card:hover {
+   transform: translateY(-4px);
+   box-shadow: 0 15px 30px rgba(250, 204, 21, 0.25);
+}
+
+.hero-card h1 {
+   font-family: sans-serif;
+   color: #facc15;
+   font-size: 2rem;
+   margin: 0 0 10px 0;
+   letter-spacing: 0.5px;
+   -webkit-text-stroke-width: 0.4px;
+   -webkit-text-stroke-color: #000;
+}
+
+.hero-card p {
+   font-size: 1.05rem;
+   line-height: 1.7;
+   color: #f1f5f9;
+   margin: 0;
+   font-weight: 300;
+}
+
+.tap-hint {
+   display: inline-block;
+   margin-top: 12px;
+   font-size: 0.75rem;
+   color: #facc15;
+   letter-spacing: 0.5px;
+   opacity: 0.85;
+}
+
+.grid {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+   gap: 20px;
+}
+
+.photo-card {
+   background: rgba(15, 23, 42, 0.75);
+   border-radius: 16px;
+   overflow: hidden;
+   border: 1px solid rgba(255, 255, 255, 0.15);
+   box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+   transition: transform 0.3s ease;
+}
+
+.photo-card img {
+   width: 100%;
+   height: 160px;
+   object-fit: cover;
+}
+
+.photo-card p {
+   padding: 10px 12px;
+   margin: 0;
+   font-size: 0.85rem;
+   color: #cbd5e1;
+   font-weight: 400;
+}
+
+/* Flip Secret Card */
+.flip-card {
+   perspective: 1000px;
+   cursor: pointer;
+   height: 235px;
+}
+
+.flip-card-inner {
+   position: relative;
+   width: 100%;
+   height: 100%;
+   text-align: center;
+   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+   transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner,
+.flip-card.flipped .flip-card-inner {
+   transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   -webkit-backface-visibility: hidden;
+   backface-visibility: hidden;
+   border-radius: 16px;
+}
+
+.flip-card-front {
+   background: rgba(15, 23, 42, 0.75);
+}
+
+.flip-card-back {
+   background: rgba(15, 23, 42, 0.92);
+   color: #facc15;
+   transform: rotateY(180deg);
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   padding: 18px;
+   border: 1px solid rgba(250, 204, 21, 0.5);
+}
+
+.secret-icon {
+   font-size: 1.8rem;
+   margin-bottom: 8px;
+   color: #facc15;
+}
+
+.flip-card-back h4 {
+   font-family: 'Playfair Display', serif;
+   margin: 0 0 6px 0;
+   font-size: 1.15rem;
+}
+
+.flip-card-back p {
+   color: #e2e8f0;
+   font-size: 0.82rem;
+   line-height: 1.5;
+   padding: 0;
+   font-weight: 300;
+}
+
+/* Music Player Card */
+.music-wrapper {
+   position: relative;
+   width: 100%;
+   height: 160px;
+   overflow: hidden;
+}
+
+.music-wrapper img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+}
+
+#playPauseBtn {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   width: 48px;
+   height: 48px;
+   border-radius: 50%;
+   border: none;
+   background: #facc15;
+   color: #0f172a;
+   font-size: 1.2rem;
+   cursor: pointer;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+   transition: transform 0.25s ease, background 0.25s ease;
+}
+
+#playPauseBtn:hover {
+   transform: translate(-50%, -50%) scale(1.1);
+   background: #ffffff;
+}
+
+.music-details {
+   padding: 12px 15px 15px 15px;
+}
+
+.music-status {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 8px;
+   margin-bottom: 8px;
+}
+
+.music-details p {
+   padding: 0;
+   margin: 0;
+   font-size: 0.82rem;
+   color: #cbd5e1;
+}
+
+.equalizer {
+   display: flex;
+   align-items: flex-end;
+   height: 12px;
+   gap: 3px;
+}
+
+.equalizer span {
+   width: 3px;
+   height: 100%;
+   background-color: #facc15;
+   border-radius: 3px;
+}
+
+.equalizer.playing span:nth-child(1) { animation: bounce 0.6s infinite ease-in-out alternate; }
+.equalizer.playing span:nth-child(2) { animation: bounce 0.8s infinite ease-in-out alternate; }
+.equalizer.playing span:nth-child(3) { animation: bounce 0.5s infinite ease-in-out alternate; }
+.equalizer.playing span:nth-child(4) { animation: bounce 0.7s infinite ease-in-out alternate; }
+
+@keyframes bounce {
+   0% { height: 3px; }
+   100% { height: 14px; }
+}
+
+.progress-container {
+   width: 100%;
+   height: 4px;
+   background: rgba(255, 255, 255, 0.2);
+   border-radius: 10px;
+   cursor: pointer;
+   overflow: hidden;
+}
+
+.progress-bar {
+   width: 0%;
+   height: 100%;
+   background: #facc15;
+   border-radius: 10px;
+   transition: width 0.1s linear;
+}
+
+
+/* Floating Elements Animation */
+.floating-elements {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   pointer-events: none;
+   z-index: 0;
+}
+
+.floating-elements span {
+   position: absolute;
+   display: block;
+   font-size: 1.4rem;
+   animation: floatUp 6s linear infinite;
+   opacity: 0.5;
+}
+
+.floating-elements span:nth-child(1) { left: 10%; animation-delay: 0s; }
+.floating-elements span:nth-child(2) { left: 30%; animation-delay: 2s; }
+.floating-elements span:nth-child(3) { left: 50%; animation-delay: 4s; }
+.floating-elements span:nth-child(4) { left: 70%; animation-delay: 1s; }
+.floating-elements span:nth-child(5) { left: 90%; animation-delay: 3s; }
+
+@keyframes floatUp {
+   0% { top: 100%; opacity: 0; }
+   50% { opacity: 0.7; }
+   100% { top: -10%; opacity: 0; }
+}

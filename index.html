@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Birthday Portal</title>
+
+    <!-- Google Fonts for Aesthetic Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</head>
+
+<body>
+
+    <!-- 4 DIGIT PIN LOCK SCREEN -->
+    <div id="lock-screen" class="card">
+        <div class="icon">🏸</div>
+        <h2>ENTER PASSWORD</h2>
+        <p class="sub-text">To Unlock Page</p>
+
+        <!-- PIN DISPLAY DOTS -->
+        <div class="pin-display">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+        <div id="error-msg">Incorrect Password</div>
+
+        <!-- NUMBER PAD -->
+        <div class="keypad">
+            <button onclick="pressNum('1')">1</button>
+            <button onclick="pressNum('2')">2</button>
+            <button onclick="pressNum('3')">3</button>
+            <button onclick="pressNum('4')">4</button>
+            <button onclick="pressNum('5')">5</button>
+            <button onclick="pressNum('6')">6</button>
+            <button onclick="pressNum('7')">7</button>
+            <button onclick="pressNum('8')">8</button>
+            <button onclick="pressNum('9')">9</button>
+            <button onclick="clearPin()" class="action-btn">Clear</button>
+            <button onclick="pressNum('0')">0</button>
+            <button onclick="deleteLast()" class="action-btn"><i class="fa-solid fa-delete-left"></i></button>
+        </div>
+
+        <div class="hint">Hint: Birthday?</div>
+    </div>
+
+    <!-- MAIN PAGE -->
+    <div id="main-content">
+        
+        <!-- Floating Animated Background Emojis -->
+        <div class="floating-elements">
+            <span>🎈</span><span>✨</span><span>🎉</span><span>💖</span><span>🎂</span>
+        </div>
+
+        <div class="card hero-card" onclick="popConfetti()">
+            <h1>🎂 Happy Birthday</h1>
+            <p>
+                Happy Birthday! 🎉<br>
+                Hope your day is full of fun. Have the best day ever! ✨
+            </p>
+            <span class="tap-hint">Tap for celebration 🎊</span>
+        </div>
+
+        <div class="grid">
+            <!-- FLIP SECRET CARD -->
+            <div class="photo-card flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="./Images/birthday-cake.gif" alt="Cake">
+                        <p>Tap to see secret note</p>
+                    </div>
+                    <div class="flip-card-back">
+                        <i class="fa-solid fa-envelope-open-text secret-icon"></i>
+                        <h4>Secret Wish ✨</h4>
+                        <p>May all your secret wishes come true this year! Stay amazing always 💖 <br>
+                            May you enjoy your next trip 🏔️ & wishing you all the best for your exam - crash it ✨ <br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Music Player Photo Card -->
+            <div class="photo-card music-card">
+                <div class="music-wrapper">
+                    <img src="./Images/nature-trail.jpg" alt="Nature Trail">
+                    <button id="playPauseBtn" onclick="toggleMusic()">
+                        <i class="fa-solid fa-pause" id="playIcon"></i>
+                    </button>
+                </div>
+                
+                <div class="music-details">
+                    <div class="music-status">
+                        <div class="equalizer playing" id="equalizer">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <p id="musicText"><i class="fa-solid fa-music"></i> Playing Song...</p>
+                    </div>
+
+                    <div class="progress-container" onclick="setSeek(event)">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <audio id="bgMusic" src="music.m4a" preload="auto" loop ></audio>
+
+</body>
+
+</html>
